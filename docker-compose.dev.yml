@@ -1,0 +1,89 @@
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: dockerfile.dev
+    container_name: frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - gateway
+    environment:
+      PORT: 3000
+    develop:
+      watch:
+        - path: ./frontend
+          action: sync
+          target: /usr/src/app
+          ignore:
+            - node_modules
+        - path: ./frontend/package.json
+          action: rebuild
+        - path: ./frontend/.env
+          action: rebuild
+  gateway:
+    build:
+      context: ./gateway
+      dockerfile: dockerfile.dev
+    container_name: gateway
+    ports:
+      - "4000:4000"
+    environment:
+      PORT: 4000
+    depends_on:
+      - cms
+    develop:
+      watch:
+        - path: ./gateway
+          action: sync
+          target: /usr/src/app
+          ignore:
+            - node_modules
+        - path: ./gateway/package.json
+          action: rebuild
+        - path: ./gateway/.env
+          action: rebuild
+  cms:
+    build:
+      context: ./cms-store
+      dockerfile: dockerfile.dev
+    container_name: strapi
+    environment:
+      DATABASE_CLIENT: postgres
+      DATABASE_NAME: ai-store-delivery
+      DATABASE_HOST: db
+      DATABASE_PORT: 5433
+      DATABASE_USERNAME: user
+      DATABASE_PASSWORD: password
+      HOST: 0.0.0.0
+      PORT: 1337
+    ports:
+      - "1337:1337"
+    depends_on:
+      - db
+    develop:
+      watch:
+        - path: ./cms-store
+          action: sync
+          target: /usr/src/app
+          ignore:
+            - node_modules
+        - path: ./cms-store/package.json
+          action: rebuild
+        - path: ./cms-store/.env
+          action: rebuild
+  db:
+    image: postgres:17
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: ai-store-delivery
+    expose:
+      - "5433"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    command: -p 5433
+volumes:
+  postgres_data:

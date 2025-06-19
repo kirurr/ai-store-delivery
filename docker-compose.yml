@@ -1,0 +1,56 @@
+services:
+  frontend:
+    build:
+      context: ./frontend
+    container_name: frontend
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+    depends_on:
+      - gateway
+  gateway:
+    build:
+      context: ./gateway
+    container_name: gateway
+    ports:
+      - "4000:4000"
+    environment:
+      NODE_ENV: production
+      PORT: 4000
+    depends_on:
+      - cms
+  cms:
+    build:
+      context: ./cms-store
+    container_name: strapi
+    environment:
+      DATABASE_CLIENT: postgres
+      DATABASE_NAME: ai-store-delivery
+      DATABASE_HOST: db
+      DATABASE_PORT: 5433
+      DATABASE_USERNAME: user
+      DATABASE_PASSWORD: password
+      NODE_ENV: production
+      HOST: 0.0.0.0
+      PORT: 1337
+    expose:
+      - "1337"
+    depends_on:
+      - db
+  db:
+    image: postgres:17
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: ai-store-delivery
+    expose:
+      - "5433"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    command: -p 5433
+volumes:
+  postgres_data:

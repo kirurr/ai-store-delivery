@@ -1,0 +1,6 @@
+*/dist
+*/node_modules
+*/.pnpm
+*/.DS_Store
+*/build
+*/.cache

@@ -4,11 +4,19 @@ RUN corepack enable && corepack prepare pnpm@latest --activate
 
 WORKDIR /app
 
-COPY pnpm-lock.yaml ./
-COPY package.json ./
+COPY ./shared ./shared/
+COPY ./tsconfig.json ./
+
+COPY ./frontend/pnpm-lock.yaml ./frontend/
+COPY ./frontend/package.json ./frontend/
+
+WORKDIR /app/frontend
 RUN pnpm install --frozen-lockfile
 
-COPY . .
+WORKDIR /app
+COPY ./frontend ./frontend/
+
+WORKDIR /app/frontend
 
 RUN pnpm build
 

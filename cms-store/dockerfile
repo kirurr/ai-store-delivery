@@ -4,12 +4,19 @@ RUN corepack enable && corepack prepare pnpm@latest --activate
 
 WORKDIR /app
 
-COPY pnpm-lock.yaml ./
-COPY package.json ./
+COPY ./shared ./shared/
+COPY ./tsconfig.json ./
+
+COPY ./cms-store/pnpm-lock.yaml ./cms-store/
+COPY ./cms-store/package.json ./cms-store/
+
+WORKDIR /app/cms-store
 RUN pnpm install --frozen-lockfile
 
-COPY . .
+WORKDIR /app
+COPY ./cms-store ./cms-store/
 
+WORKDIR /app/cms-store
 RUN pnpm build
 
 EXPOSE 1337

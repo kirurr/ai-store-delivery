@@ -4,11 +4,19 @@ RUN corepack enable && corepack prepare pnpm@latest --activate
 
 WORKDIR /app
 
-COPY pnpm-lock.yaml ./
-COPY package.json ./
+COPY ./shared ./shared/
+COPY ./tsconfig.json ./
+
+COPY ./gateway/pnpm-lock.yaml ./gateway/
+COPY ./gateway/package.json ./gateway/
+
+WORKDIR /app/gateway
 RUN pnpm install --frozen-lockfile
 
-COPY . .
+WORKDIR /app
+COPY ./gateway ./gateway/
+
+WORKDIR /app/gateway
 
 RUN pnpm build
 

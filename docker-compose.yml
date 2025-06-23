@@ -1,7 +1,8 @@
 services:
   frontend:
     build:
-      context: ./frontend
+      context: .
+      dockerfile: frontend/dockerfile
     container_name: frontend
     ports:
       - "3000:3000"
@@ -12,7 +13,8 @@ services:
       - gateway
   gateway:
     build:
-      context: ./gateway
+      context: .
+      dockerfile: gateway/dockerfile
     container_name: gateway
     ports:
       - "4000:4000"
@@ -24,7 +26,8 @@ services:
       - auth
   auth:
     build:
-      context: ./auth
+      context: .
+      dockerfile: auth/dockerfile
     container_name: auth
     expose:
       - "4001"
@@ -33,7 +36,8 @@ services:
       PORT: 4001
   cms:
     build:
-      context: ./cms-store
+      context: .
+      dockerfile: cms-store/dockerfile
     container_name: strapi
     environment:
       DATABASE_CLIENT: postgres

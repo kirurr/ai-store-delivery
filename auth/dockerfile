@@ -4,11 +4,19 @@ RUN corepack enable && corepack prepare pnpm@latest --activate
 
 WORKDIR /app
 
-COPY pnpm-lock.yaml ./
-COPY package.json ./
+COPY ./shared ./shared/
+COPY ./tsconfig.json ./
+
+COPY ./auth/pnpm-lock.yaml ./auth/
+COPY ./auth/package.json ./auth/
+
+WORKDIR /app/auth
 RUN pnpm install --frozen-lockfile
 
-COPY . .
+WORKDIR /app
+COPY ./auth ./auth/
+
+WORKDIR /app/auth
 
 RUN pnpm build
 

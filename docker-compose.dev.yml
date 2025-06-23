@@ -1,8 +1,8 @@
 services:
   frontend:
     build:
-      context: ./frontend
-      dockerfile: dockerfile.dev
+      context: ./
+      dockerfile: ./frontend/dockerfile.dev
     container_name: frontend
     ports:
       - "3000:3000"
@@ -27,8 +27,8 @@ services:
           action: rebuild
   gateway:
     build:
-      context: ./gateway
-      dockerfile: dockerfile.dev
+      context: .
+      dockerfile: ./gateway/dockerfile.dev
     container_name: gateway
     ports:
       - "4000:4000"
@@ -54,7 +54,8 @@ services:
           action: rebuild
   auth:
     build:
-      context: ./auth
+      context: .
+      dockerfile: ./auth/dockerfile.dev
     container_name: auth
     expose:
       - "4001"
@@ -78,8 +79,8 @@ services:
           action: rebuild
   cms:
     build:
-      context: ./cms-store
-      dockerfile: dockerfile.dev
+      context: .
+      dockerfile: ./cms-store/dockerfile.dev
     container_name: strapi
     environment:
       DATABASE_CLIENT: postgres
@@ -93,8 +94,8 @@ services:
     ports:
       - "1337:1337"
     volumes: 
-      - ./cms-store:/app
-      - /app/node_modules
+      - ./cms-store:/app/cms-store/
+      - /app/cms-store/node_modules
     depends_on:
       - db
     develop:

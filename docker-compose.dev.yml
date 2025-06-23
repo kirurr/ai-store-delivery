@@ -21,6 +21,10 @@ services:
           action: rebuild
         - path: ./frontend/.env
           action: rebuild
+        - path: ./frontend/dockerfile.dev
+          action: rebuild
+        - path: ./frontend/dockerfile
+          action: rebuild
   gateway:
     build:
       context: ./gateway
@@ -44,6 +48,10 @@ services:
           action: rebuild
         - path: ./gateway/.env
           action: rebuild
+        - path: ./gateway/dockerfile.dev
+          action: rebuild
+        - path: ./gateway/dockerfile
+          action: rebuild
   auth:
     build:
       context: ./auth
@@ -64,6 +72,10 @@ services:
           action: rebuild
         - path: ./auth/.env
           action: rebuild
+        - path: ./auth/dockerfile.dev
+          action: rebuild
+        - path: ./auth/dockerfile
+          action: rebuild
   cms:
     build:
       context: ./cms-store
@@ -80,6 +92,9 @@ services:
       PORT: 1337
     ports:
       - "1337:1337"
+    volumes: 
+      - ./cms-store:/app
+      - /app/node_modules
     depends_on:
       - db
     develop:
@@ -92,6 +107,10 @@ services:
         - path: ./cms-store/package.json
           action: rebuild
         - path: ./cms-store/.env
+          action: rebuild
+        - path: ./cms-store/dockerfile.dev
+          action: rebuild
+        - path: ./cms-store/dockerfile
           action: rebuild
   db:
     image: postgres:17

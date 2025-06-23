@@ -32,6 +32,7 @@ services:
       PORT: 4000
     depends_on:
       - cms
+      - auth
     develop:
       watch:
         - path: ./gateway
@@ -42,6 +43,26 @@ services:
         - path: ./gateway/package.json
           action: rebuild
         - path: ./gateway/.env
+          action: rebuild
+  auth:
+    build:
+      context: ./auth
+    container_name: auth
+    expose:
+      - "4001"
+    environment:
+      NODE_ENV: production
+      PORT: 4001
+    develop:
+      watch:
+        - path: ./auth
+          action: sync
+          target: /usr/src/app
+          ignore:
+            - node_modules
+        - path: ./auth/package.json
+          action: rebuild
+        - path: ./auth/.env
           action: rebuild
   cms:
     build:

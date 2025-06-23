@@ -21,6 +21,16 @@ services:
       PORT: 4000
     depends_on:
       - cms
+      - auth
+  auth:
+    build:
+      context: ./auth
+    container_name: auth
+    expose:
+      - "4001"
+    environment:
+      NODE_ENV: production
+      PORT: 4001
   cms:
     build:
       context: ./cms-store

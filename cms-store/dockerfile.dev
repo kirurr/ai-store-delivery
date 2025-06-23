@@ -8,9 +8,7 @@ COPY pnpm-lock.yaml ./
 COPY package.json ./
 RUN pnpm install --frozen-lockfile
 
-COPY . .
-
 EXPOSE 1337
 
-CMD ["pnpm", "dev"]
+CMD ["pnpm", "develop"]
 

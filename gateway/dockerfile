@@ -5,7 +5,6 @@ RUN corepack enable && corepack prepare pnpm@latest --activate
 WORKDIR /app
 
 COPY ./shared ./shared/
-COPY ./tsconfig.json ./
 
 COPY ./gateway/pnpm-lock.yaml ./gateway/
 COPY ./gateway/package.json ./gateway/

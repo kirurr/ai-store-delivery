@@ -14,7 +14,7 @@ services:
       watch:
         - path: ./frontend
           action: sync
-          target: /usr/src/app
+          target: /app/frontend
           ignore:
             - node_modules
         - path: ./frontend/package.json
@@ -41,7 +41,7 @@ services:
       watch:
         - path: ./gateway
           action: sync
-          target: /usr/src/app
+          target: /app/gateway
           ignore:
             - node_modules
         - path: ./gateway/package.json
@@ -66,7 +66,7 @@ services:
       watch:
         - path: ./auth
           action: sync
-          target: /usr/src/app
+          target: /app/auth
           ignore:
             - node_modules
         - path: ./auth/package.json
@@ -102,7 +102,7 @@ services:
       watch:
         - path: ./cms-store
           action: sync
-          target: /usr/src/app
+          target: /app/cms-store
           ignore:
             - node_modules
         - path: ./cms-store/package.json

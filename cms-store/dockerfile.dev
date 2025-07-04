@@ -5,7 +5,6 @@ RUN corepack enable && corepack prepare pnpm@latest --activate
 WORKDIR /app
 
 COPY ./shared ./shared/
-COPY ./tsconfig.json ./
 
 COPY ./cms-store/pnpm-lock.yaml ./cms-store/
 COPY ./cms-store/package.json ./cms-store/

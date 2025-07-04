@@ -5,7 +5,6 @@ RUN corepack enable && corepack prepare pnpm@latest --activate
 WORKDIR /app
 
 COPY ./shared ./shared/
-COPY ./tsconfig.json ./
 
 COPY ./auth/pnpm-lock.yaml ./auth/
 COPY ./auth/package.json ./auth/

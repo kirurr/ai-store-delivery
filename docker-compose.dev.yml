@@ -17,6 +17,11 @@ services:
           target: /app/frontend
           ignore:
             - node_modules
+        - path: ./shared
+          action: sync
+          target: /app/shared
+          ignore:
+            - node_modules
         - path: ./frontend/package.json
           action: rebuild
         - path: ./frontend/.env
@@ -44,6 +49,11 @@ services:
           target: /app/gateway
           ignore:
             - node_modules
+        - path: ./shared
+          action: sync
+          target: /app/shared
+          ignore:
+            - node_modules
         - path: ./gateway/package.json
           action: rebuild
         - path: ./gateway/.env
@@ -67,6 +77,11 @@ services:
         - path: ./auth
           action: sync
           target: /app/auth
+          ignore:
+            - node_modules
+        - path: ./shared
+          action: sync
+          target: /app/shared
           ignore:
             - node_modules
         - path: ./auth/package.json
@@ -103,6 +118,11 @@ services:
         - path: ./cms-store
           action: sync
           target: /app/cms-store
+          ignore:
+            - node_modules
+        - path: ./shared
+          action: sync
+          target: /app/shared
           ignore:
             - node_modules
         - path: ./cms-store/package.json

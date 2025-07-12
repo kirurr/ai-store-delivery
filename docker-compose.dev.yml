@@ -100,6 +100,7 @@ services:
     environment:
       DATABASE_CLIENT: postgres
       DATABASE_NAME: ai-store-delivery
+      NODE_ENV: development
       DATABASE_HOST: db
       DATABASE_PORT: 5433
       DATABASE_USERNAME: user

@@ -4,4 +4,7 @@ export default ({ env }) => ({
       jwtSecret: env("JWT_SECRET"),
     },
   },
+  "auto-slug-manager": {
+    enabled: true,
+  },
 });

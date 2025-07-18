@@ -11,14 +11,65 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "Name": {
+    "name": {
       "type": "string",
       "required": true
     },
-    "Categories": {
+    "categories": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::category.category"
+    },
+    "price": {
+      "type": "float",
+      "required": true
+    },
+    "description": {
+      "type": "richtext",
+      "required": true
+    },
+    "ingredients": {
+      "type": "text",
+      "required": true
+    },
+    "images": {
+      "type": "media",
+      "multiple": true,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "shelfLife": {
+      "type": "text",
+      "required": false
+    },
+    "storageConditions": {
+      "type": "string"
+    },
+    "energyKcalPer100g": {
+      "type": "float"
+    },
+    "proteinPer100g": {
+      "type": "float"
+    },
+    "fatPer100g": {
+      "type": "float"
+    },
+    "carbohydratesPer100g": {
+      "type": "float"
+    },
+    "company": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::company.company",
+      "inversedBy": "products"
+    },
+    "slug": {
+      "type": "string"
     }
   }
 }

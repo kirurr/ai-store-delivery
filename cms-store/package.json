@@ -22,6 +22,7 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.0.0",
+    "strapi-plugin-auto-slug-manager-a-mi13": "^1.0.2",
     "styled-components": "^6.0.0"
   },
   "devDependencies": {
@@ -37,6 +38,5 @@
   "strapi": {
     "uuid": "a838a016-662b-4629-9ba8-62a7ef6e2cfe",
     "installId": "2709922b7277918fd5c6f70dcd537565d6e7c45c2b1dbc5e2177a3b6329e9443"
-  },
-  "packageManager": "pnpm@10.12.1+sha512.f0dda8580f0ee9481c5c79a1d927b9164f2c478e90992ad268bbb2465a736984391d6333d2c327913578b2804af33474ca554ba29c04a8b13060a717675ae3ac"
+  }
 }

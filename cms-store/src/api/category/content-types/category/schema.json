@@ -11,14 +11,18 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "Name": {
+    "name": {
       "type": "string",
       "required": true
     },
-    "ParentCategory": {
+    "parentCategory": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::category.category"
+    },
+    "slug": {
+      "type": "string",
+      "unique": true
     }
   }
 }

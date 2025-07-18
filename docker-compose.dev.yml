@@ -116,11 +116,6 @@ services:
       - db
     develop:
       watch:
-        - path: ./cms-store
-          action: sync
-          target: /app/cms-store
-          ignore:
-            - node_modules
         - path: ./shared
           action: sync
           target: /app/shared

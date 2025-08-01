@@ -72,11 +72,11 @@
       "target": "api::order.order",
       "mappedBy": "user"
     },
-    "company": {
+    "adressess": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::company.company",
-      "inversedBy": "owner"
+      "relation": "oneToMany",
+      "target": "api::user-adress.user-adress",
+      "mappedBy": "user"
     }
   }
 }

@@ -32,6 +32,7 @@ export class AuthController {
       }
     }
   }
+
   @Post('signup')
   async proxySignup(@Body() body: any) {
     try {

@@ -1,6 +1,6 @@
 "use server";
 
-import { ServerActionResponse } from "@/types";
+import { ApiResponse } from "@/types";
 import { cookies } from "next/headers";
 import {
   StrapiSignInRequest,
@@ -12,7 +12,7 @@ export async function signUpAction({
   username,
   email,
   password,
-}: StrapiSignUpRequest): Promise<ServerActionResponse> {
+}: StrapiSignUpRequest): Promise<ApiResponse> {
   try {
     const response = await fetch("http://gateway:4000/auth/signup", {
       method: "POST",
@@ -47,7 +47,7 @@ export async function signUpAction({
 export async function signInAction({
   identifier,
   password,
-}: StrapiSignInRequest): Promise<ServerActionResponse> {
+}: StrapiSignInRequest): Promise<ApiResponse> {
   try {
     const response = await fetch("http://gateway:4000/auth/signin", {
       method: "POST",

@@ -4,4 +4,6 @@ type Success<T> = T extends undefined
 
 type Failure = { status: false; message: string };
 
-export type ServerActionResponse<T = undefined> = Success<T> | Failure;
+export type ApiResponse<T = undefined> = Success<T> | Failure;
+
+

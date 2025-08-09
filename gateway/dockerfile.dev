@@ -8,6 +8,8 @@ COPY ./shared ./shared/
 
 COPY ./gateway/pnpm-lock.yaml ./gateway/
 COPY ./gateway/package.json ./gateway/
+COPY ./gateway/tsconfig.json ./gateway/
+COPY ./gateway/nest-cli.json ./gateway/
 
 WORKDIR /app/gateway
 RUN pnpm install --frozen-lockfile

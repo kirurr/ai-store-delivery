@@ -1,24 +1,6 @@
-import { cookies } from "next/headers";
-
-export async function fetchWithAuth(
-  token: string,
-  url: string,
-  options: RequestInit,
-) {
-  return fetch(url, {
-    ...options,
-    headers: {
-      ...options.headers,
-      Authorization: `Bearer ${token}`,
-    },
-  });
+export function getGatewayUrl(): string {
+  const gatewayUrl = process.env["GATEWAY_URL"];
+  if (!gatewayUrl) throw Error("No GATEWAY_URL env");
+	return gatewayUrl;
 }
 
-export async function checkAuth() {
-	const cookieStore = await cookies();
-	const token = cookieStore.get("token");
-	if (token) {
-		return true;
-	}
-	return false;
-}

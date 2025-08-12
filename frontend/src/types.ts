@@ -2,8 +2,6 @@ type Success<T> = T extends undefined
   ? { status: true; message?: string }
   : { status: true; data: T; message?: string };
 
-type Failure = { status: false; message: string };
+type Failure = { status: false; message: string; statusCode?: number };
 
 export type ApiResponse<T = undefined> = Success<T> | Failure;
-
-

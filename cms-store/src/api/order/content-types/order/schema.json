@@ -38,6 +38,10 @@
     },
     "commentary": {
       "type": "text"
+    },
+    "address": {
+      "type": "text",
+      "required": true
     }
   }
 }

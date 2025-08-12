@@ -36,12 +36,6 @@ export class AppController {
     };
   }
 
-  @Get('/products/:slug')
-  async proxyProductPage(@Param('slug') slug: string): Promise<StrapiProduct> {
-    const product = await this.strapiService.getProductBySlug(slug);
-    return product;
-  }
-
   @Post('/products/cart')
   async proxyProductsForCart(@Body('idArray') idArray: number[]) {
     const products = await this.strapiService.getProductsByIdArray(
@@ -49,4 +43,11 @@ export class AppController {
     );
     return products;
   }
+
+  @Get('/products/:slug')
+  async proxyProductPage(@Param('slug') slug: string): Promise<StrapiProduct> {
+    const product = await this.strapiService.getProductBySlug(slug);
+    return product;
+  }
+
 }

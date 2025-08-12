@@ -1,10 +1,6 @@
 import { ApiResponse } from "@/types";
 import { getGatewayUrl } from "@/utils";
-import {
-  StrapiCollectionResponse,
-  StrapiErrorResponse,
-  StrapiProduct,
-} from "@shared";
+import { NextJSError, StrapiCollectionResponse, StrapiProduct } from "@shared";
 
 export async function getProductBySlug(
   slug: string,
@@ -13,15 +9,14 @@ export async function getProductBySlug(
 
   try {
     const response = await fetch(`${gatewayUrl}products/${slug}`);
-    if (response.status == 500) {
-      throw new Error(`Failed to fetch product by id ${slug}`);
-    }
 
     if (!response.ok) {
-      const error = (await response.json()) as StrapiErrorResponse;
-      throw new Error(error.error.message);
-    }
+      if (response.status == 500)
+        throw new Error(`Failed to fetch product by id ${slug}`);
 
+      const error = (await response.json()) as NextJSError;
+      throw new Error(error.message);
+    }
     const category = (await response.json()) as StrapiProduct;
 
     return {
@@ -29,8 +24,12 @@ export async function getProductBySlug(
       data: category,
     };
   } catch (err: any) {
-    console.error("error getProductBySlug", err);
-    return { status: false, message: err.message };
+    if (err instanceof Error) {
+      console.error("error getProductBySlug", err);
+      return { status: false, message: err.message };
+    }
+    console.error("unknown error getProductBySlug", err);
+    return { status: false, message: "unknown error" };
   }
 }
 
@@ -52,8 +51,8 @@ export async function getProductsByIdArray(
     }
 
     if (!response.ok) {
-      const error = (await response.json()) as StrapiErrorResponse;
-      throw new Error(error.error.message);
+      const error = (await response.json()) as NextJSError;
+      throw new Error(error.message);
     }
 
     const products =

@@ -13,12 +13,13 @@ type CartContextType = {
   isPending: boolean;
   error: Error | null;
   ids: number[];
+	productsIdsMap: Map<number, CartItemType>
 };
 
 type ItemsType = Array<{ product: StrapiProduct } & CartItemType> | undefined;
 
-type CartMapType = Map<number, CartItemType>;
 type CartItemType = { quantity: number; order: number };
+type CartMapType = Map<number, CartItemType>;
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
@@ -125,6 +126,7 @@ export default function CartProvider({
         isPending,
         error,
         ids,
+				productsIdsMap
       }}
     >
       {children}

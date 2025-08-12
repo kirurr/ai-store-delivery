@@ -2,8 +2,10 @@ export type StrapiErrorResponse = {
   data: null;
   error: {
     status: number;
-    name: string;
+    name?: string;
     message: string;
+    statusCode?: number;
+    error?: string;
     details:
       | {}
       | {

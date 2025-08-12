@@ -1,6 +1,7 @@
-import AddProductToCartButton from "@/cart/components/addToCartButton";
+import ProductButton from "@/product/components/productButton";
 import BackButton from "@/product/components/backButton";
 import { getProductBySlug } from "@/product/repository";
+import { notFound } from "next/navigation";
 
 export default async function ProductPage({
   params,
@@ -13,12 +14,12 @@ export default async function ProductPage({
   if (res.status === false) {
     return <div>{res.message}</div>;
   }
-  if (!res.data) return <div>no product</div>;
+  if (!res.data) return notFound()
   return (
     <div>
-      <h1>{res.data.name}</h1>
       <BackButton text="back" />
-      <AddProductToCartButton id={res.data.id} />
+      <h1>{res.data.name}</h1>
+      <ProductButton id={res.data.id} />
     </div>
   );
 }

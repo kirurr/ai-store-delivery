@@ -9,7 +9,6 @@ import {
   StrapiCollectionResponse,
   StrapiErrorResponse,
   StrapiProduct,
-  StrapiSingleCollectionResponse,
 } from '@shared';
 
 @Injectable()
@@ -39,6 +38,9 @@ export class StrapiService {
       throw new HttpException(data.error.message, data.error.status);
     }
 
+		if (data.data.length == 0) {
+			throw new BadRequestException(`Product by ${slug} is not found`)
+		}
     return data.data[0];
   }
 

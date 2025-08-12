@@ -71,12 +71,6 @@
       "relation": "oneToMany",
       "target": "api::order.order",
       "mappedBy": "user"
-    },
-    "adressess": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::user-adress.user-adress",
-      "mappedBy": "user"
     }
   }
 }

@@ -1,5 +1,6 @@
 import { ApiResponse } from "@/types";
 import {
+  NextJSError,
   StrapiCategory,
   StrapiCollectionResponse,
   StrapiErrorResponse,
@@ -23,8 +24,8 @@ export async function getCategoryPageBySlug(slug: string): Promise<
     }
 
     if (!response.ok) {
-      const error = (await response.json()) as StrapiErrorResponse;
-      throw new Error(error.error.message);
+      const error = (await response.json()) as NextJSError;
+      throw new Error(error.message);
     }
 
     const category = (await response.json()) as {

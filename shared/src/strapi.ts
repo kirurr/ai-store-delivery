@@ -1,11 +1,11 @@
+import { StrapiUser } from "./user";
+
 export type StrapiErrorResponse = {
   data: null;
   error: {
     status: number;
-    name?: string;
+    name: string;
     message: string;
-    statusCode?: number;
-    error?: string;
     details:
       | {}
       | {
@@ -19,18 +19,7 @@ export type StrapiErrorResponse = {
 export type StrapiAuthResponse =
   | {
       jwt: string;
-      user: {
-        id: number;
-        documentId: string;
-        username: string;
-        email: string;
-        provider: string;
-        confirmed: string;
-        blocked: string;
-        createdAt: string;
-        updatedAt: string;
-        publishedAt: string;
-      };
+      user: StrapiUser;
     }
   | StrapiErrorResponse;
 

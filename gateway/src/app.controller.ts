@@ -1,11 +1,22 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Headers,
+  Param,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 import { AppService } from './app.service';
 import { StrapiService } from './strapi/strapi.service';
 import {
   StrapiCategory,
   StrapiCollectionResponse,
+  StrapiOrder,
   StrapiProduct,
 } from '@shared';
+import { AuthHeaderGuard } from './auth.guard';
+import { CreateOrderDTO } from './dto/createOrder.dto';
 
 @Controller()
 export class AppController {
@@ -38,9 +49,7 @@ export class AppController {
 
   @Post('/products/cart')
   async proxyProductsForCart(@Body('idArray') idArray: number[]) {
-    const products = await this.strapiService.getProductsByIdArray(
-      idArray,
-    );
+    const products = await this.strapiService.getProductsByIdArray(idArray);
     return products;
   }
 
@@ -50,4 +59,14 @@ export class AppController {
     return product;
   }
 
+  @UseGuards(AuthHeaderGuard)
+  @Post('/orders')
+  async proxyCreateOrder(
+    @Body() createOrderDTO: CreateOrderDTO,
+    @Headers('Authorization') authHeader: string,
+  ): Promise<StrapiOrder> {
+    const token = authHeader.split(' ')[1]!;
+    const order = await this.strapiService.createOrder(createOrderDTO, token);
+    return order;
+  }
 }
